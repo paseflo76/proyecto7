@@ -45,7 +45,6 @@ JWT_SECRET=kjviutkjasbciarnvporn
 
 4️⃣ Iniciar el servidor:
 
-
 npm start
 o con Nodemon para desarrollo:
 
@@ -56,23 +55,26 @@ El servidor se ejecutará en:
 📡 Endpoints disponibles
 🔹 Usuarios (Autenticación)
 Método Endpoint Descripción
-POST /auth/register Registra un nuevo usuario
-POST /auth/login Inicia sesión y devuelve un token JWT
+GET /isAdmin/ Obtiene todos los user por el admin
+PUT /isAdmin/ modifica todos los user por el admin
+POST /register Registra un nuevo usuario
+POST /login Inicia sesión y devuelve un token JWT
+Delete /isAdmin/ Elimian todos los user por el admin
 
 🔹 Juegos
 Método Endpoint Descripción
 GET /games Obtener todos los juegos
 GET /games/:id Obtener un juego por ID
-POST /games Crear un nuevo juego (Requiere autenticación JWT)
-PUT /games/:id Actualizar un juego existente (Requiere autenticación JWT)
-DELETE /games/:id Eliminar un juego (Requiere autenticación JWT)
+POST /ISAUTH/games Crear un nuevo juego (Requiere autenticación JWT)
+PUT /isAdmin/games/:id Actualizar un juego existente (Requiere autenticación JWT)por el admin
+DELETE /isAdmin/games/:id Eliminar un juego (Requiere autenticación JWT)por el admin
 
 🔹 Plataformas
 Método Endpoint Descripción
 GET /plataformas Obtener todas las plataformas de gaming
 GET /plataformas/:id Obtener una plataforma por ID
-POST /plataformas Crear una nueva plataforma (Requiere autenticación JWT)
-PUT /plataformas/:id Actualizar una plataforma (evitando duplicados en juegos, Requiere autenticación JWT)
-DELETE /plataformas/:id Eliminar una plataforma (Requiere autenticación JWT)
-🔑 Autenticación con JWT
+POST /isAdmin/plataformas Crear una nueva plataforma (Requiere autenticación JWT)por el admin
+PUT /isAdmin/plataformas/:id Actualizar una plataforma (evitando duplicados en juegos, Requiere autenticación JWT)por el admin
+DELETE /isAdmin/plataformas/:id Eliminar una plataforma (Requiere autenticación JWT)
+🔑 Autenticación con JWTpor el admin
 Después de iniciar sesión en /auth/login, recibirás un token JWT que deberás incluir en las peticiones protegidas.
