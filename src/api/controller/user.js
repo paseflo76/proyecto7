@@ -78,13 +78,29 @@ const updateUser = async (req, res) => {
   }
 }
 
-const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res) => {
   try {
     const { id } = req.params
-    const UserDeleted = await User.findByIdAndDelete(id)
-    return res.status(200).json({ mensaje: 'usuario eliminado', UserDeleted })
+
+    // Si el usuario autenticado es admin, puede eliminar a cualquiera
+    // Si no es admin, solo puede eliminarse a sí mismo
+    if (req.user.rol !== 'admin' && req.user._id.toString() !== id) {
+      return res
+        .status(403)
+        .json({ message: 'No puedes eliminar este usuario' })
+    }
+
+    const deletedUser = await User.findByIdAndDelete(id)
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'Usuario no encontrado' })
+    }
+
+    return res.status(200).json({ message: 'Usuario eliminado con éxito' })
   } catch (error) {
-    return res.status(400).json(error)
+    return res
+      .status(500)
+      .json({ message: 'Error al eliminar el usuario', error })
   }
 }
 
