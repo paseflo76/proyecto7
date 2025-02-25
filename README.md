@@ -64,7 +64,6 @@ Delete /isAdmin/ Elimian todos los user por el admin
 🔹 Juegos
 Método Endpoint Descripción
 GET /games Obtener todos los juegos
-GET /games/:id Obtener un juego por ID
 POST /ISAUTH/games Crear un nuevo juego (Requiere autenticación JWT)
 PUT /isAdmin/games/:id Actualizar un juego existente (Requiere autenticación JWT)por el admin
 DELETE /isAdmin/games/:id Eliminar un juego (Requiere autenticación JWT)por el admin
@@ -72,7 +71,6 @@ DELETE /isAdmin/games/:id Eliminar un juego (Requiere autenticación JWT)por el 
 🔹 Plataformas
 Método Endpoint Descripción
 GET /plataformas Obtener todas las plataformas de gaming
-GET /plataformas/:id Obtener una plataforma por ID
 POST /isAdmin/plataformas Crear una nueva plataforma (Requiere autenticación JWT)por el admin
 PUT /isAdmin/plataformas/:id Actualizar una plataforma (evitando duplicados en juegos, Requiere autenticación JWT)por el admin
 DELETE /isAdmin/plataformas/:id Eliminar una plataforma (Requiere autenticación JWT)
