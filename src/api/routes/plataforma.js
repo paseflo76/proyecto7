@@ -10,7 +10,6 @@ const {
 const plataformasRouter = require('express').Router()
 
 plataformasRouter.get('/', getPlataformas)
-plataformasRouter.get('/', getPlataformaByid)
 plataformasRouter.post('/', [isAdmin], postPlataforma)
 plataformasRouter.put('/:id', [isAdmin], updatePlataforma)
 plataformasRouter.delete('/:id', [isAdmin], plataformadelete)
