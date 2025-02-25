@@ -9,14 +9,7 @@ const getPlataformas = async (req, res, next) => {
   }
 }
 
-const getPlataformaByid = async (req, res, next) => {
-  try {
-    const plataforma = await Plataformas.findById(id).populate('games')
-    return res.status(200).json(plataforma)
-  } catch (error) {
-    return res.status(400).json('error')
-  }
-}
+
 
 const postPlataforma = async (req, res, next) => {
   try {
@@ -76,6 +69,5 @@ module.exports = {
   getPlataformas,
   postPlataforma,
   updatePlataforma,
-  getPlataformaByid,
   plataformadelete
 }
