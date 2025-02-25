@@ -3,8 +3,7 @@ const {
   getPlataformas,
   postPlataforma,
   updatePlataforma,
-  plataformadelete,
-  getPlataformaByid
+  plataformadelete
 } = require('../controller/plataforma')
 
 const plataformasRouter = require('express').Router()
