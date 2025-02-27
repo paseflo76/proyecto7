@@ -57,7 +57,7 @@ const plataformadelete = async (req, res, next) => {
     const { id } = req.params
     const plataformaDeleted = await Plataformas.findByIdAndDelete(id)
     return res.status(200).json({
-      messade: 'Elemento eliminado',
+      message: 'Elemento eliminado',
       elemento: plataformaDeleted
     })
   } catch (error) {
