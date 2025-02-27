@@ -40,7 +40,7 @@ const deleteGame = async (req, res, next) => {
     const { id } = req.params
     const gameDeleted = await Game.findByIdAndDelete(id)
     return res.status(200).json({
-      messade: 'Elemento eliminado',
+      message: 'Elemento eliminado',
       elemento: gameDeleted
     })
   } catch (error) {
