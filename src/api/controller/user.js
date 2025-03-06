@@ -38,14 +38,18 @@ const login = async (req, res, next) => {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const token = generateSign(user._id)
         return res.status(200).json({ user, token })
+      } else {
+        // Se llega aquí si la contraseña no coincide
+        return res.status(400).json('El usuario o la contraseña son incorrectos')
       }
     } else {
-      return res.status(400).json('el usuario o la contraseña son incorrectos')
+      return res.status(400).json('El usuario o la contraseña son incorrectos')
     }
   } catch (error) {
     return res.status(400).json(error)
   }
 }
+
 
 const updateUser = async (req, res) => {
   try {
