@@ -56,13 +56,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params
     const { rol, ...updateData } = req.body // Extraemos el rol para manejarlo aparte
 
-    // Verificar si el usuario autenticado es administrador
-    if (req.user.rol !== 'Admin') {
-      return res
-        .status(403)
-        .json({ message: 'No tienes permisos para modificar usuarios' })
-    }
-
+   
     // Buscar y actualizar el usuario
     const updatedUser = await User.findByIdAndUpdate(
       id,
