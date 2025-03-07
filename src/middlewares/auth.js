@@ -1,43 +1,35 @@
 const User = require('../api/models/user')
 const { verifyJwt } = require('../config/jwt')
 
-const isAuth = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization
-    const parsedToken = token.replace('Bearer ', '')
+const checkAuth =
+  (role = null) =>
+  async (req, res, next) => {
+    try {
+      const token = req.headers.authorization
+      if (!token) return res.status(400).json('No estás autorizado')
 
-    const { id } = verifyJwt(parsedToken)
+      const parsedToken = token.replace('Bearer ', '')
+      const { id } = verifyJwt(parsedToken)
 
-    const user = await User.findById(id)
+      const user = await User.findById(id)
+      if (!user) return res.status(400).json('No estás autorizado')
 
-    user.password = null
-    req.user = user
-    next()
-  } catch (error) {
-    return res.status(400).json('no estas autorizado')
-  }
-}
-const isAdmin = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization
-    const parsedToken = token.replace('Bearer ', '')
+      if (role && user.rol !== role) {
+        return res
+          .status(400)
+          .json('Esta acción solo la pueden realizar los administradores')
+      }
 
-    const { id } = verifyJwt(parsedToken)
-
-    const user = await User.findById(id)
-
-    if (user.rol === 'Admin') {
       user.password = null
       req.user = user
       next()
-    } else {
-      return res
-        .status(400)
-        .json('Esta acción sólo la pueden realizar los administradores')
+    } catch (error) {
+      return res.status(400).json('No estás autorizado')
     }
-  } catch (error) {
-    return res.status(400).json('No estás autorizado')
   }
-}
 
-module.exports = { isAuth, isAdmin }
+// Exportar las versiones específicas
+module.exports = {
+  isAuth: checkAuth(),
+  isAdmin: checkAuth('Admin')
+}
